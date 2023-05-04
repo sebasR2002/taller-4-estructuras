@@ -33,6 +33,26 @@ public class DelayRecord implements Comparable<DelayRecord> {
     private Integer securityDelay;
     private Integer lateAircraftDelay;
 
+    public Date getDate() {
+        return date;
+    }
+
+    public String getCarrier() {
+        return carrier;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public String getDest() {
+        return dest;
+    }
+
+    public Integer getArrDelayNew() {
+        return arrDelayNew;
+    }
+
     // Constructor that initializes all the fields
     public DelayRecord(int year, String date, String carrier, int carrierId, String flightNumber, int originAirportId,
             String origin, String originCity, String originState, int destAirportId, String dest, String destCity,
@@ -77,21 +97,30 @@ public class DelayRecord implements Comparable<DelayRecord> {
     private static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
     public static ArrayList<DelayRecord> readCSVFile(String filename) {
-        int lines = 0;
+
         ArrayList<DelayRecord> delays = new ArrayList<>();
+
+        int lines = 0;
+
         In in = new In(filename);
         in.readLine();
+
         while (in.hasNextLine()) {
+
             lines++;
             // read a line an create a DelayRecord instance
             String line = in.readLine();
             // split comma separated fields, except within quotes
             String[] fields = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+
             // StdOut.println(
             // lines + " : " + fields[1] + "," + fields[3] + "," + fields[4] + "," +
             // fields[5] + "," + fields[9]);
+
             try {
+
                 DelayRecord delay = new DelayRecord(
+
                         Integer.parseInt(fields[0]), // year
                         fields[1], // date
                         fields[2], // carrier
@@ -114,12 +143,18 @@ public class DelayRecord implements Comparable<DelayRecord> {
                         fields[19], // securityDelay
                         fields[20] // lateAircraftDelay
                 );
+
                 delays.add(delay);
+
             } catch (ParseException e) {
+
                 System.out.println("Error reading line: " + line);
+
             }
         }
+
         in.close();
+
         return delays;
     }
 
