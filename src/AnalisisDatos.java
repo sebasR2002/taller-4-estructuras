@@ -5,7 +5,7 @@ public class AnalisisDatos {
     public static void main(String[] args) throws Exception {
         String route = "548634059_T_ONTIME_REPORTING.csv";
         System.out.println("Inicio de lectura");
-        // ArrayList<DelayRecord> a = DelayRecord.readCSVFile(route);
+        ArrayList<DelayRecord> a = DelayRecord.readCSVFile(route);
         System.out.println("Fin lectura");
     }
 
