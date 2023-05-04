@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import edu.princeton.cs.algs4.*;
 
@@ -7,6 +8,17 @@ public class AnalisisDatos {
         System.out.println("Inicio de lectura");
         ArrayList<DelayRecord> a = DelayRecord.readCSVFile(route);
         System.out.println("Fin lectura");
+        DelayRecord[] arreglo = new DelayRecord[a.size()];
+        int cont = 0;
+        for (DelayRecord delayRecord : a) {
+            arreglo[cont] = delayRecord;
+            cont++;
+        }
+        Quick.sort(arreglo);
+
+        for (int i = 0; i <= arreglo.length; i++) {
+            System.out.println(arreglo[1].toString());
+        }
     }
 
     public ST<String, Integer> meanRouteDelay(ArrayList<DelayRecord> delays) {

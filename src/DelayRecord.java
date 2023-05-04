@@ -9,7 +9,7 @@ import edu.princeton.cs.algs4.StdOut;
 
 // Fields of a DelayRecord
 // YEAR	FL_DATE	OP_UNIQUE_CARRIER	OP_CARRIER_AIRLINE_ID	OP_CARRIER_FL_NUM	ORIGIN_AIRPORT_ID	ORIGIN	ORIGIN_CITY_NAME	ORIGIN_STATE_ABR	DEST_AIRPORT_ID	DEST	DEST_CITY_NAME	DEST_STATE_ABR	DEP_DELAY_NEW	ARR_DELAY	ARR_DELAY_NEW	CARRIER_DELAY	WEATHER_DELAY	NAS_DELAY	SECURITY_DELAY	LATE_AIRCRAFT_DELAY
-public class DelayRecord {
+public class DelayRecord implements Comparable<DelayRecord> {
 
     private int year;
     private Date date;
@@ -87,8 +87,9 @@ public class DelayRecord {
             String line = in.readLine();
             // split comma separated fields, except within quotes
             String[] fields = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-            // StdOut.println(lines+" :
-            // "+fields[1]+","+fields[3]+","+fields[4]+","+fields[5]+","+fields[9]);
+            // StdOut.println(
+            // lines + " : " + fields[1] + "," + fields[3] + "," + fields[4] + "," +
+            // fields[5] + "," + fields[9]);
             try {
                 DelayRecord delay = new DelayRecord(
                         Integer.parseInt(fields[0]), // year
@@ -127,6 +128,22 @@ public class DelayRecord {
         String filename = "548634059_T_ONTIME_REPORTING.csv";
         ArrayList<DelayRecord> delays = readCSVFile(filename);
         StdOut.println("Number of records: " + delays.size());
+    }
+
+    @Override
+    public int compareTo(DelayRecord x) {
+
+        if (this.origin.compareTo(x.origin) != 0) {
+            return this.origin.compareTo(x.origin);
+        } else if (this.dest.compareTo(x.dest) != 0) {
+            return this.dest.compareTo(x.dest);
+        } else
+            return 0;
+    }
+
+    @Override
+    public String toString() {
+        return origin + " - " + dest;
     }
 
 }
