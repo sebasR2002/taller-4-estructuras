@@ -15,7 +15,7 @@ public class DelayRecord {
     private Date date;
     private String carrier;
     private int carrierId;
-    private int flightNumber;
+    private String flightNumber;
     private int originAirportId;
     private String origin;
     private String originCity;
@@ -34,7 +34,7 @@ public class DelayRecord {
     private Integer lateAircraftDelay;
 
     // Constructor that initializes all the fields
-    public DelayRecord(int year, String date, String carrier, int carrierId, int flightNumber, int originAirportId,
+    public DelayRecord(int year, String date, String carrier, int carrierId, String flightNumber, int originAirportId,
             String origin, String originCity, String originState, int destAirportId, String dest, String destCity,
             String destState, String depDelay, String arrDelay, String arrDelayNew, String carrierDelay,
             String weatherDelay, String nasDelay, String securityDelay, String lateAircraftDelay)
@@ -66,8 +66,10 @@ public class DelayRecord {
     private static Integer parseInteger(String s) {
         if (s.isEmpty()) {
             return null;
+
         } else {
-            return Integer.parseInt(s);
+            float a = Float.parseFloat(s);
+            return (int) a;
         }
     }
 
@@ -93,7 +95,7 @@ public class DelayRecord {
                         fields[1], // date
                         fields[2], // carrier
                         Integer.parseInt(fields[3]), // carrierId
-                        Integer.parseInt(fields[4]), // flightNumber
+                        (fields[4]), // flightNumber
                         Integer.parseInt(fields[5]), // originAirportId
                         fields[6], // origin
                         fields[7], // originCity
