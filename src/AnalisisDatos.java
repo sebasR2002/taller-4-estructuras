@@ -37,35 +37,43 @@ public class AnalisisDatos {
 
         String ruta = arreglo[0].toString();
         int suma = 0;
-        cont = 1;
+        cont = 0;
 
         for (int i = 0; i < arreglo.length; i++) {
 
-            if (i == arreglo.length - 1) {
+            if (i != arreglo.length - 1) {
 
-                if (arreglo[i].getArrDelayNew() != null)
-                    suma += arreglo[i].getArrDelayNew();
-                cont++;
-                T.put(ruta, suma / cont);
+                if (arreglo[i].toString().compareTo(ruta) == 0) {
 
-            } else {
-                if (arreglo[i].toString() == ruta) {
-
-                    if (arreglo[i].getArrDelayNew() != null)
-                        suma += arreglo[i].getArrDelayNew();
                     cont++;
+                    if (arreglo[i].getArrDelayNew() != null)
+                        suma = suma + arreglo[i].getArrDelayNew();
 
-                } else {
+                }
 
-                    T.put(ruta, suma / cont);
+                else {
+
+                    int x = suma / cont;
+                    T.put(ruta, x);
                     cont = 1;
-                    ruta = arreglo[i].toString();
-
                     if (arreglo[i].getArrDelayNew() != null)
                         suma = arreglo[i].getArrDelayNew();
+                    else
+                        suma = 0;
+                    ruta = arreglo[i].toString();
 
                 }
             }
+
+            else {
+
+                cont++;
+                suma = suma + arreglo[i].getArrDelayNew();
+                int x = suma / cont;
+                T.put(ruta, x);
+
+            }
+
         }
 
         return T;
